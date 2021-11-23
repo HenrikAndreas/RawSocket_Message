@@ -1,9 +1,14 @@
-#include <stdio.h>
+#include "utils.h"
+#include "mimir.h"
+
+
 
 int main(int argc, char** argv) {
 
+    verify_args(argc, argv);
 
-    printf("We have %d commandline arguments!\n", (argc-1));
+    int raw_sock = create_socket(ETH_PRO_MIMIR);
+    
 
     return 0;
 }
