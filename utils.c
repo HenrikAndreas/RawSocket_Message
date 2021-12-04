@@ -3,6 +3,7 @@
 
 void verify_args(int argc, char** argv) {
     if (argc == 3) {
+        printf("Arguments verified...\n");
         return;
     }
 
@@ -13,3 +14,12 @@ void verify_args(int argc, char** argv) {
     }
     printf("Correct usage: ./client <msg> <dest_addr>\n");
 }
+
+void check_error(int condition, char* tag) {
+    if (condition < 0) {
+        perror(tag);
+        exit(EXIT_FAILURE);
+    }
+    return;
+}
+
