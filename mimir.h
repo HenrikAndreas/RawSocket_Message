@@ -4,6 +4,8 @@
 #include "utils.h"
 #include "eth.h"
 
+#include <unistd.h>
+#include <sys/types.h>
 #include <sys/socket.h>
 #include <arpa/inet.h>
 
