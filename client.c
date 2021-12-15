@@ -5,8 +5,15 @@
 #include <sys/socket.h>
 
 void verify_args(int argc, char** argv) {
-    if ((argc > 2) || (argc < 2)) {
+    if ((argc != 3)) {
         printf("Usage: <FILL IN YOU BITCH>\n");
+        exit(EXIT_FAILURE);
+    }
+}
+
+void error_check(int val, char* tag) {
+    if (val < 0) {
+        perror(tag);
         exit(EXIT_FAILURE);
     }
 }
@@ -14,15 +21,12 @@ void verify_args(int argc, char** argv) {
 int main(int argc, char** argv) {
 
     verify_args(argc, argv);
+    int sock;
+    error_check(sock = (AF_INET, SOCK_RAW, 0x0b01), "SOCKET INIT");
 
-    int sock = (AF_INET, SOCK_RAW, 0x0b01);
-    if (sock < 0) {
-        perror("SOCKET INIT");
-        exit(EXIT_FAILURE);
-    }
     
-    // Sockaddr_ll
-
+    
+    // Get 
 
 
 
