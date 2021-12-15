@@ -2,7 +2,7 @@
 
 void verify_args(int argc, char** argv) {
     if ((argc != 3)) {
-        printf("Usage: <FILL IN YOU BITCH>\n");
+        printf("Usage: ./client <dest_ip> <msg>\n");
         exit(EXIT_FAILURE);
     }
 }

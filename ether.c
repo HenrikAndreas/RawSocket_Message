@@ -24,8 +24,18 @@ struct interface* get_interface(char* name) {
     return iface;
 }
 
+char* create_eth_hdr(char* msg, uint8_t src[ETHER_ALEN], uint8_t dest[ETHER_ALEN]) {
+    char* buffer = malloc(sizeof(struct eth_header));
+    memset(buffer, 0, sizeof(struct eth_header));
+
+    // ?- A cleaner implementation perhaps
+
+    return msg;
+}
+
 void send_eth(int sock, char* buffer, struct interface* iface) {
 
     int rc = sendto(sock, buffer, strlen(buffer), 0, (const struct sockaddr *)&(iface->iface_addr), sizeof(struct sockaddr_ll));
     error_check(rc, "sendto");
+
 }

@@ -6,21 +6,19 @@
 int main(int argc, char** argv) {
 
     verify_args(argc, argv);
+    char* msg = "The art of dying is the way to let all go";
+    char* iface_name = "wlp0s20f3";
+    uint8_t dest_mac[ETHER_ALEN] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
+
 
     int sock = socket(AF_PACKET, SOCK_RAW, 0x88B5);
     error_check(sock, "socket");
 
-    struct interface* iface = get_interface("wlp0s20f3");
+    struct interface* iface = get_interface(iface_name);
 
-    char* buffer = "The art of dying is the way to let all go";
-
-
+    // ?- free the buffer
+    char* buffer = create_eth_hdr(msg, iface->iface_addr.sll_addr, dest_mac);
     send_eth(sock, buffer, iface);
-    // int rc = sendto(sock, buffer, strlen(buffer), 0, (const struct sockaddr *)&(iface->iface_addr), sizeof(struct sockaddr_ll));
-    // error_check(rc, "sendto");
-    // printf("Sent bytes:\t %d!\n", rc);
-
-
 
 
     close(sock);    
