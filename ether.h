@@ -1,6 +1,7 @@
 #ifndef ETHER_H
 #define ETHER_H
 
+#include "sock_buff.h"
 #include "utils.h"
 
 #include <string.h>
@@ -15,11 +16,6 @@
 
 #define ETHER_ALEN 6
 
-struct interface {
-    struct sockaddr_ll iface_addr;
-    char* iface_name;
-    int iface_index;
-};
 
 struct eth_header {
     uint8_t ether_dhost[ETHER_ALEN];
@@ -27,8 +23,7 @@ struct eth_header {
     uint16_t protocol;
 } __attribute__((packed));
 
-char* create_eth_hdr(char*, uint8_t[ETHER_ALEN], uint8_t[ETHER_ALEN]);
-void send_eth(int, char*, struct interface*);
-struct interface* get_interface(char*);
+struct eth_header* create_eth_hdr(char*, uint8_t[ETHER_ALEN], uint8_t[ETHER_ALEN]);
+void send_eth(int, struct sock_buff*);
 
 #endif
