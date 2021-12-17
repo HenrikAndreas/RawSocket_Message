@@ -53,3 +53,18 @@ int create_sock(uint16_t protocol) {
     return sock;
 
 }
+
+/*
+Initiation Socket Buffer with payload, and flags
+*/
+void init_skb(struct sock_buff* skb, struct arguments args) {
+    if (strcmp(args.payload_flag, "-m") == 0) {
+         skb->payload = args.payload;
+         skb->size = strlen(skb->payload);
+    } else if (strcmp(args.payload_flag, "-f") == 0) {
+        printf("File Transmission is not yet supported...\n");
+        free(skb->iface);
+        free(skb);
+        exit(EXIT_FAILURE);
+    }
+}

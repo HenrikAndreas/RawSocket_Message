@@ -1,6 +1,7 @@
 #ifndef SOCK_BUFF_H
 #define SOCK_BUFF_H
 
+#include "sock_buff.h"
 #include "libs.h"
 
 #define ETHER_ALEN 6
@@ -23,6 +24,7 @@ struct interface {
     int iface_index;
 };
 
+void init_skb(struct sock_buff*, struct arguments);
 struct interface* get_interface(char*);
 struct sock_buff* create_skb(char*);
 int create_sock(uint16_t);
