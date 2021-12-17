@@ -5,13 +5,13 @@
 int main(int argc, char** argv) {
 
     verify_args(argc, argv);
-    char* iface_name = "wlp0s20f3";
+    // char* iface_name = "wlp0s20f3";
     uint8_t dest_mac[ETHER_ALEN] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
 
-    struct arguments     = parse_args(argc, argv);
+    struct arguments args = parse_args(argc, argv);
 
     int sock = create_sock(ETHER_P_MIMIR);
-    struct sock_buff* skb = create_skb(iface_name);
+    struct sock_buff* skb = create_skb(args.interface);
 
     init_skb(skb, args);
 

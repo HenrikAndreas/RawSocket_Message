@@ -7,6 +7,7 @@
 
 struct arguments {
     char* payload_flag;
+    char* interface;
     char* payload;
     char* ip_dest;
     int debug;

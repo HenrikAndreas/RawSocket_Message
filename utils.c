@@ -2,7 +2,7 @@
 
 void verify_args(int argc, char** argv) {
     if ((argc < MIN_ARGS)) {
-        printf("Usage: ./client -d <dest_ip> -m <msg>\n");
+        printf("Usage: ./client -i <interface> -d <dest_ip> -m <msg>\n");
         exit(EXIT_FAILURE);
     }
 
@@ -30,6 +30,8 @@ struct arguments parse_args(int argc, char** argv) {
 
         } else if (strcmp(argv[i], "--debug") == 0) {
             args.debug = 1;
+        } else if (strcmp(argv[i], "-i") == 0) {
+            args.interface = argv[++i];
         }
     }
 
@@ -38,6 +40,8 @@ struct arguments parse_args(int argc, char** argv) {
     printf("Payload Type: %s\n", args.payload_flag);
     printf("Payload: %s\n", args.payload);
     printf("Debug Mode: %d\n", args.debug);
+    printf("Interface Mode: %s\n", args.interface);
+
 
 
     return args;
