@@ -34,8 +34,8 @@ Initiation the Socket Buffer
 struct sock_buff* create_skb(char* iface_name) {
     struct sock_buff* skb = malloc(sizeof(struct sock_buff));
     
-    skb->eth_hdr = malloc(sizeof(struct eth_header));
-    memset(skb->eth_hdr, 0, sizeof(struct eth_header));
+    // skb->eth_hdr = malloc(sizeof(struct eth_header));
+    // memset(skb->eth_hdr, 0, sizeof(struct eth_header));
 
     skb->iface = get_interface(iface_name);
 

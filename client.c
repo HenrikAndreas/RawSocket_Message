@@ -12,7 +12,7 @@ int main(int argc, char** argv) {
 
 
 
-    int sock = socket(AF_PACKET, SOCK_RAW, htons(0x88B5));
+    int sock = socket(AF_PACKET, SOCK_RAW, htons(ETHER_P_MIMIR));
     error_check(sock, "socket");
 
     struct sock_buff* skb = create_skb(iface_name);

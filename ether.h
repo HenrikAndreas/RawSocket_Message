@@ -5,6 +5,7 @@
 #include "libs.h"
 
 #define ETHER_ALEN 6
+#define ETHER_P_MIMIR 0xBB85
 
 
 struct eth_header {
