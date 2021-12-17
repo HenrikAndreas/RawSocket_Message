@@ -24,17 +24,9 @@ void send_eth(int sock, struct sock_buff* skb) {
     memcpy(buffer + sizeof(struct eth_header), skb->payload, skb->size);
     memcpy(buffer, skb->eth_hdr, sizeof(struct eth_header));
 
-    // // // Verifying
-    // struct sock_buff* s = malloc(sizeof(struct sock_buff));
-    // s->eth_hdr = malloc(sizeof(struct eth_header));
-
-    // memcpy(s->eth_hdr, buffer, sizeof(struct eth_header));
-    // memcpy(s->payload, buffer + sizeof(struct eth_header), skb->size);
-
-    // printf("P: %x\n", s->eth_hdr->ether_shost[0]);
-
     
     int rc = sendto(sock, buffer, buf_size, 0, (const struct sockaddr *)&(skb->iface->iface_addr), sizeof(struct sockaddr_ll));
     error_check(rc, "sendto");
 
+    free(buffer);
 }

@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
-
+#include <unistd.h> // for close
 #include <linux/if_packet.h>
 #include <sys/socket.h>
 #include <sys/types.h>

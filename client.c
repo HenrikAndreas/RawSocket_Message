@@ -12,7 +12,7 @@ int main(int argc, char** argv) {
 
 
 
-    int sock = socket(AF_PACKET, SOCK_RAW, 0x88B5);
+    int sock = socket(AF_PACKET, SOCK_RAW, htons(0x88B5));
     error_check(sock, "socket");
 
     struct sock_buff* skb = create_skb(iface_name);
@@ -21,13 +21,13 @@ int main(int argc, char** argv) {
     
     skb->eth_hdr = create_eth_hdr(skb->iface->iface_addr.sll_addr, dest_mac);
 
-    // // ?- free the buffer
-    // char* buffer = create_eth_hdr(msg, iface->iface_addr.sll_addr, dest_mac);
     send_eth(sock, skb);
 
 
-    // close(sock);    
-    // free(iface);
+    close(sock);    
+    free(skb->iface);
+    free(skb->eth_hdr);
+    free(skb);
 
     printf("\nSuccessfully terminated client...\n");
     return 0;
