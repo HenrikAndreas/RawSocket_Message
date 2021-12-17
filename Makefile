@@ -1,4 +1,4 @@
-CLIENT_ARGS = -d 10.0.0.52 -m "Gojira"
+CLIENT_ARGS = -d 10.0.0.52 -m "The art of dying is to let all go"
 C_FILES = $(find *.c)
 
 all: compile client
