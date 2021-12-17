@@ -41,3 +41,15 @@ struct sock_buff* create_skb(char* iface_name) {
 
     return skb;
 }
+
+/*
+Creating the Socket File Descriptor
+*/
+int create_sock(uint16_t protocol) {
+
+    int sock = socket(AF_PACKET, SOCK_RAW, htons(protocol));
+    error_check(sock, "socket");
+
+    return sock;
+
+}

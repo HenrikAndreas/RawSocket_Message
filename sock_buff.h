@@ -24,5 +24,6 @@ struct interface {
 
 struct interface* get_interface(char*);
 struct sock_buff* create_skb(char*);
+int create_sock(uint16_t);
 
 #endif

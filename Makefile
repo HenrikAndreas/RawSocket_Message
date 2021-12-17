@@ -1,4 +1,4 @@
-CLIENT_ARGS = Hello! 127.0.0.1
+CLIENT_ARGS = -d 10.0.0.52 -m "Gojira"
 C_FILES = $(find *.c)
 
 all: compile client

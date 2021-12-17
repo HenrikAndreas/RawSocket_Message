@@ -7,7 +7,6 @@
 #define ETHER_ALEN 6
 #define ETHER_P_MIMIR 0xBB85
 
-
 struct eth_header {
     uint8_t ether_dhost[ETHER_ALEN];
     uint8_t ether_shost[ETHER_ALEN];

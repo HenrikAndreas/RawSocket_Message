@@ -7,7 +7,7 @@ struct eth_header* create_eth_hdr(uint8_t src[ETHER_ALEN], uint8_t dest[ETHER_AL
     struct eth_header* eth_hdr = malloc(sizeof(struct eth_header));
     memcpy(eth_hdr->ether_shost, src, ETHER_ALEN);
     memcpy(eth_hdr->ether_dhost, dest, ETHER_ALEN);
-    eth_hdr->protocol = 0x88B5; // ?- Set to ETH_P_MIMIR
+    eth_hdr->protocol = htons(ETHER_P_MIMIR); // ?- Set to ETH_P_MIMIR
 
     return eth_hdr;
 }
