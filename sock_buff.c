@@ -1,6 +1,9 @@
 #include "ether.h"
 #include "sock_buff.h"
 
+/*
+Getting desired Network Interface to Transmit / Receive data
+*/
 struct interface* get_interface(char* name) {
 
     struct interface* iface = malloc(sizeof(struct interface));
@@ -25,6 +28,9 @@ struct interface* get_interface(char* name) {
     return iface;
 }
 
+/*
+Initiation the Socket Buffer
+*/
 struct sock_buff* create_skb(char* iface_name) {
     struct sock_buff* skb = malloc(sizeof(struct sock_buff));
     
