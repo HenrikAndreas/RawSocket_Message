@@ -1,8 +1,7 @@
 #ifndef UTILS_H
 #define UTILS_H
 
-#include <stdlib.h>
-#include <stdio.h>
+#include "libs.h"
 
 
 void verify_args(int, char**);
