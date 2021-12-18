@@ -4,7 +4,9 @@
 #include "ether.h"
 #include "libs.h"
 
-
+/*
+ARP - Address Resolution Protocol is here defined as a linked list
+*/
 struct arp {
     struct arp_table* next;
     uint8_t mac_dest[ETHER_ALEN];
