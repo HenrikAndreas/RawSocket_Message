@@ -8,17 +8,19 @@
 ARP - Address Resolution Protocol is here defined as a linked list
 */
 struct arp {
-    struct arp_table* next;
+    struct arp* next;
     uint8_t mac_dest[ETHER_ALEN];
     char* ip;
-    char*name 
+    char*name;
 
 };
 
+struct arp* create_arp_entry(char*, uint8_t[ETHER_ALEN]);
+void add_connection(struct arp*, struct arp*);
 struct arp* create_arp_table();
 void update_connection();
 void remove_connection();
 void find_connection();
-void add_connection();
+
 
 #endif

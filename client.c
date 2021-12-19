@@ -16,7 +16,10 @@ int main(int argc, char** argv) {
     init_skb(skb, args);
 
 
-    
+    // ARP 
+    struct arp* arp_table = create_arp_table();
+    struct arp* new = create_arp_entry(args.ip_dest, dest_mac);
+    add_connection(arp_table, new);
     // Search for ARP entry
         // If IP - ARP hit
             // Send to arp MAC
@@ -40,6 +43,8 @@ int main(int argc, char** argv) {
     free(skb->iface);
     free(skb->eth_hdr);
     free(skb);
+    free(arp_table->next);
+    free(arp_table);
 
     printf("\nSuccessfully terminated client...\n");
     return 0;
