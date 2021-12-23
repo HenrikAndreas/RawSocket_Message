@@ -17,9 +17,11 @@ int main(int argc, char** argv) {
 
 
     // ARP 
-    struct arp* arp_table = create_arp_table();
+    struct node* arp_table = create_arp_table();
     struct arp* new = create_arp_entry(args.ip_dest, dest_mac);
     add_connection(arp_table, new);
+    free(new); // Have to free since we memcpy
+
     // Search for ARP entry
         // If IP - ARP hit
             // Send to arp MAC
@@ -43,7 +45,8 @@ int main(int argc, char** argv) {
     free(skb->iface);
     free(skb->eth_hdr);
     free(skb);
-    free(arp_table->next);
+    
+    free(arp_table->arp);
     free(arp_table);
 
     printf("\nSuccessfully terminated client...\n");
