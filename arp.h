@@ -22,6 +22,7 @@ struct arp* create_arp_entry(char*, uint8_t[ETHER_ALEN]);
 void add_connection(struct node*, struct arp*);
 void print_arp_content(struct node*);
 struct node* create_arp_table();
+void cleanup_arp(struct node*);
 void print_arps(struct node*);
 void update_connection();
 void remove_connection();

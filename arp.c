@@ -12,13 +12,14 @@ void add_connection(struct node* arp_table, struct arp* new_arp) {
         printf("Creating ARP entry...\n");
         arp_table->arp = malloc(sizeof(struct arp));
         memcpy(arp_table->arp, new_arp, sizeof(struct arp));
-        
-
-    } else {
-        arp_table->next = malloc(sizeof(struct arp));
-        add_connection(arp_table->next, new_arp);
+        return;   
 
     }
+    arp_table->next = malloc(sizeof(struct arp));
+    memset(arp_table->next, 0, sizeof(struct arp));
+    add_connection(arp_table->next, new_arp);
+
+
 
 }
 
@@ -50,7 +51,8 @@ void print_arp_content(struct node* node) {
         printf("%X\n", node->arp->mac_dest[ETHER_ALEN-1]);
 
         if (node->next != NULL) {
-            print_arps(node->next);
+            print_arp_content(node->next);
         }
     }
 }
+

@@ -26,7 +26,7 @@ int main(int argc, char** argv) {
     add_connection(arp_table, new2);
     free(new2);
 
-    // print_arps(arp_table);
+    print_arps(arp_table);
     // Search for ARP entry
         // If IP - ARP hit
             // Send to arp MAC
