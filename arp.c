@@ -56,3 +56,16 @@ void print_arp_content(struct node* node) {
     }
 }
 
+/*
+An iterative recursion to deallocate ARP Nodes
+*/
+void cleanup_arp(struct node* node) {
+    struct node* tmp;
+
+    while (node != NULL) {
+        tmp = node;
+        node = node->next;
+        free(tmp->arp);
+        free(tmp);
+    }
+}

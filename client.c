@@ -51,10 +51,7 @@ int main(int argc, char** argv) {
     free(skb->eth_hdr);
     free(skb);
     
-    free(arp_table->next->arp);
-    free(arp_table->next);
-    free(arp_table->arp);
-    free(arp_table);
+    cleanup_arp(arp_table);
 
     printf("\nSuccessfully terminated client...\n");
     return 0;
