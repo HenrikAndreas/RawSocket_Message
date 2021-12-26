@@ -1,10 +1,10 @@
 #ifndef IP_H
 #define IP_H
 
-#include "sock_buff.h"
 #include "libs.h"
 
 #define IPV4 0x04
+
 
 struct ip_header {
     uint8_t ihl : 4;
@@ -20,7 +20,10 @@ struct ip_header {
     uint32_t dest_addr;
 } __attribute__((packed));
 
-void create_ip_hdr(struct sock_buff* skb);
+
+#include "sock_buff.h"
+
+void create_ip_hdr(struct sock_buff*);
 
 #endif
 
