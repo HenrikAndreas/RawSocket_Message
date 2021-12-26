@@ -4,6 +4,9 @@
 #include "ether.h"
 #include "libs.h"
 
+#define ARP_REQ 0x01
+#define ARP_RES 0x00
+
 /*
 ARP - Address Resolution Protocol is here defined as a linked list
 */

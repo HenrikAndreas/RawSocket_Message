@@ -3,6 +3,7 @@
 
 #include "sock_buff.h"
 #include "libs.h"
+#include "ip.h"
 
 #define ETHER_ALEN 6
 
@@ -10,9 +11,9 @@
 struct sock_buff {
     struct interface* iface;
     struct eth_header* eth_hdr;
+    struct ip_header* ip;
     char* payload;
     int size;
-    // ip hdr
     // arp hdr
     // mimir hdr | application header | layer 5
     // uint16_t protocol;

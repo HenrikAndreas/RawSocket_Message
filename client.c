@@ -2,6 +2,8 @@
 #include "utils.h"
 #include "sock_buff.h"
 #include "arp.h"
+#include "ip.h"
+
 int main(int argc, char** argv) {
 
     verify_args(argc, argv);
