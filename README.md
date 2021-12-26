@@ -1,2 +1,3 @@
-# RawSocket_Chat
-RawSocket Chatting Application using its own protocol. Connect to a server, send messages to another client
+# Message Integrity Media Interim Resolution ( MIMIR )
+
+Sending a message to a LAN device, by using ARP and IPv4
