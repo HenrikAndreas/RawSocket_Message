@@ -3,6 +3,12 @@
 struct skb_buff* socket_buffer;
 
 /*
+Sending a message with the MIMIR protocol
+*/
+void mimir_send(int sock, char* ip, char* msg) {
+    
+}
+/*
 Initiating Socket Buffer and ARP Table
 */
 void init_mimir() {

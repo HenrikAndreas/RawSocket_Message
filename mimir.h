@@ -14,7 +14,7 @@ struct mimir {
     uint16_t checksum;
 };
 
-
+void mimir_send(int, char*, char*);
 int create_socket(uint16_t);
 void cleanup_mimir(int);
 void init_mimir();

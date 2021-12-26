@@ -4,6 +4,9 @@
 int main(int argc, char** argv) {
 
     // Handle arguments
+    /*These two are temporary*/
+    char* ip = "10.0.0.53";
+    char* msg = "They art of dying is the way to let all go";
 
     // Initiate Socket
     int sock = create_socket(MIMIR_PORT);
@@ -11,6 +14,7 @@ int main(int argc, char** argv) {
     // Initiate ARP Table
     init_mimir();
 
+    mimir_send(sock, ip, msg);
     // Initiate Interface with MAC and IPv4 ( LAN )
 
     // Send argumnets message / file as MIMIR protocol
