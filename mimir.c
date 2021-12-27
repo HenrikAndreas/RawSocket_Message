@@ -7,6 +7,9 @@ Sending a message with the MIMIR protocol
 */
 void mimir_send(int sock, char* ip, char* msg) {
     
+    struct arp* dest_arp = find_arp(ip); // UNFINISHED
+    free(dest_arp);
+
 }
 /*
 Initiating Socket Buffer and ARP Table

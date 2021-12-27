@@ -20,6 +20,10 @@ struct arp {
     char* ip_addr;
 };
 
+struct arp* create_arp_entry(char*, uint8_t[ETHER_ALEN]);
+void add_connection(struct node*, struct arp*);
+void print_arp_content(struct node*);
 struct node* create_arp_table();
+struct arp* find_arp(char*);
 
 #endif
