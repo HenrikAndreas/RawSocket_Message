@@ -43,9 +43,60 @@ struct arp* create_arp_entry(char* ip, uint8_t mac[ETHER_ALEN]) {
 /*
 Returning an ARP if match
 */
-struct arp* find_arp(char* ip) {
-    uint8_t mac[ETHER_ALEN] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
-    struct arp* matched_arp = create_arp_entry(ip, mac);
+struct arp* find_arp(struct node* arp_table, char* ip) {
+    if (arp_table == NULL) {
+        return NULL;
+    }
+    if (arp_table->arp != NULL && !strcmp(arp_table->arp->ip_addr, ip)) {
+        printf("ARP Match Found...\n");
+
+        struct arp* matched_arp = malloc(sizeof(struct arp));
+        memset(matched_arp, 0, sizeof(struct arp));
+        matched_arp->ip_addr = ip;
+        memcpy(matched_arp->eth_addr, arp_table->arp->eth_addr, ETHER_ALEN);
+        return matched_arp;
+        
+    }
+
+    find_arp(arp_table->next, ip);
     
-    return matched_arp;
+}
+
+/*
+An iterative recursion to deallocate ARP Nodes
+*/
+void cleanup_arp(struct node* node) {
+    struct node* tmp;
+
+    while (node != NULL) {
+        tmp = node;
+        node = node->next;
+        free(tmp->arp);
+        free(tmp);
+    }
+}
+
+
+
+void print_arps(struct node* node) {
+
+    printf("\n_______________________ ARP _______________________\n");
+    print_arp_content(node);
+    printf("_____________________________________________________\n");
+}
+
+void print_arp_content(struct node* node) {
+    if (node->arp != NULL) {
+
+        printf("IP: \t %s \t MAC: ", node->arp->ip_addr);
+        // Nicely printed IP and MAC addresses
+        for (int i = 0; i<ETHER_ALEN-1; i++) {
+            printf("%X:", node->arp->eth_addr[i]);
+        }
+        printf("%X\n", node->arp->eth_addr[ETHER_ALEN-1]);
+
+        if (node->next != NULL) {
+            print_arp_content(node->next);
+        }
+    }
 }

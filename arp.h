@@ -22,8 +22,10 @@ struct arp {
 
 struct arp* create_arp_entry(char*, uint8_t[ETHER_ALEN]);
 void add_connection(struct node*, struct arp*);
+struct arp* find_arp(struct node*, char*);
 void print_arp_content(struct node*);
 struct node* create_arp_table();
-struct arp* find_arp(char*);
+void cleanup_arp(struct node*);
+void print_arps(struct node*);
 
 #endif

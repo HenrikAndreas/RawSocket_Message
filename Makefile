@@ -10,4 +10,4 @@ client: ${C_FILES}
 val_client:
 	valgrind --track-origins=yes --leak-check=full --show-leak-kinds=all ./out/client ${CLIENT_ARGS}
 clean:
-	rm -rf out/*
+	rm -rf out/* && rm -rf vg*
