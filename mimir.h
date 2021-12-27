@@ -4,6 +4,7 @@
 #include "libs.h"
 #include "arp.h"
 #include "skb.h"
+#include "ip.h"
 
 #define MIMIR_PORT 0x01A4
 

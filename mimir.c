@@ -11,17 +11,23 @@ void mimir_send(int sock, char* ip, char* msg) {
     struct arp* dest_arp = find_arp(socket_buffer->arp_table, ip);
     if (dest_arp == NULL) {
         printf("ARP Match Not Found...\n");
+        // ?- Send ARP REQ
         return;
     }
 
-    printf("IP - %s\n", dest_arp->ip_addr);
+    printf("Found ARP with IP:\t%s\n", dest_arp->ip_addr);
 
-    // add_connection(socket_buffer->arp_table, dest_arp);
+    socket_buffer->payload = (uint8_t*) msg;
+
+    socket_buffer->mimir->src_port = MIMIR_PORT;
+    socket_buffer->mimir->dst_port = MIMIR_PORT;
+    socket_buffer->mimir->mimir_length = sizeof(struct mimir) + strlen(msg);
+
+    
+
+    ip_send(socket_buffer);
+
     free(dest_arp);
-
-    print_arps(socket_buffer->arp_table);
-
-
 }
 /*
 Initiating Socket Buffer and ARP Table
@@ -29,21 +35,8 @@ Initiating Socket Buffer and ARP Table
 void init_mimir() {
     socket_buffer = malloc(sizeof(struct skb_buff));
     socket_buffer->arp_table = create_arp_table();
+    socket_buffer->mimir = malloc(sizeof(struct mimir));
 
-    uint8_t mac[ETHER_ALEN] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
-    char* ip2 = "10.0.0.53";
-
-    struct arp* new = create_arp_entry(ip2, mac);
-    add_connection(socket_buffer->arp_table, new);
-    free(new);
-
-
-    uint8_t mac3[ETHER_ALEN] = {0xAA, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA};
-    char* ip3 = "10.0.0.70";
-
-    struct arp* new3 = create_arp_entry(ip3, mac3);
-    add_connection(socket_buffer->arp_table, new3);
-    free(new3);
 
 }
 
@@ -69,6 +62,7 @@ Deallocating memory
 */
 void cleanup_mimir(int sock) {
     cleanup_arp(socket_buffer->arp_table);
+    free(socket_buffer->mimir);
     free(socket_buffer);
     close(sock);
 }
