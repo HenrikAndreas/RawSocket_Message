@@ -45,6 +45,7 @@ Returning an ARP if match
 */
 struct arp* find_arp(struct node* arp_table, char* ip) {
     if (arp_table == NULL) {
+        printf("ARP Match Failed...\n");
         return NULL;
     }
     if (arp_table->arp != NULL && !strcmp(arp_table->arp->ip_addr, ip)) {
