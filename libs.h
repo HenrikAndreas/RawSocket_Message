@@ -7,3 +7,7 @@
 #include <sys/types.h>
 #include <arpa/inet.h> // inet_addr, htons
 #include <ifaddrs.h>		/* getifaddrs */
+#include <sys/ioctl.h>
+#include <netinet/in.h>
+#include <net/if.h>
+#include <netdb.h>

@@ -8,12 +8,13 @@
 The Socket Buffer Structure
 */
 struct skb_buff {
+    struct interface* iface;
     struct node* arp_table;
     struct mimir* mimir;
     struct ip_hdr* ip;
     uint8_t* payload;
+    char* ip_addr;
     // eth_header
-    // net_interface
 };
 
 #include "ip.h"

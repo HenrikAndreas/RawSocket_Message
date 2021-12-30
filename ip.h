@@ -23,6 +23,7 @@ struct ip_hdr {
 
 }__attribute__((packed));
 
+uint32_t ip_to_int (const char*);
 void ip_send(struct skb_buff*);
 
 #endif

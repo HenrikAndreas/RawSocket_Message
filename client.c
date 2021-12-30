@@ -13,6 +13,7 @@ int main(int argc, char** argv) {
     
     // Initiate ARP Table
     init_mimir();
+    mimir_set_interface("wlp0s20f3");
 
     mimir_send(sock, ip, msg);
     // Initiate Interface with MAC and IPv4 ( LAN )
