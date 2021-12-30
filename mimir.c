@@ -89,7 +89,6 @@ Setting the Interface and bind it to socket buffer
 */
 void mimir_set_interface(char* name) {
     socket_buffer->iface = get_interface(name);
-    // printf("Successfully set interface:\t%s\n", socket_buffer->iface->iface_name);
     printf("Successfully set interface:\t%s\t%s\n", socket_buffer->iface->iface_name, socket_buffer->iface->iface_ipv4);
 
 }
