@@ -9,11 +9,15 @@ void ip_send(struct skb_buff* socket_buffer) {
     socket_buffer->ip->id = 0x0000;
     socket_buffer->ip->flags = 0b000;
     socket_buffer->ip->frag_offset = 0b0000000000000;
-    socket_buffer->ip->ttl = 0x40;
-    socket_buffer->ip->protocol = IPV4;
-    socket_buffer->ip->checksum = 0;    
+    socket_buffer->ip->ttl = 0x40; 
+    socket_buffer->ip->protocol = IPV4; 
+    socket_buffer->ip->checksum = 0;
 
     socket_buffer->ip->dst_ip = ip_to_int(socket_buffer->ip_addr);
+    socket_buffer->ip->src_ip = ip_to_int(socket_buffer->iface->iface_ipv4);
+
+    printf("DEST: %d\n", socket_buffer->ip->dst_ip);
+    printf("SRC: %d\n", socket_buffer->ip->src_ip);
 
 }
 
