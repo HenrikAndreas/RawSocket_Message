@@ -16,11 +16,13 @@ void ip_send(struct skb_buff* socket_buffer) {
     socket_buffer->ip->dst_ip = ip_to_int(socket_buffer->ip_addr);
     socket_buffer->ip->src_ip = ip_to_int(socket_buffer->iface->iface_ipv4);
 
-    printf("DEST: %d\n", socket_buffer->ip->dst_ip);
-    printf("SRC: %d\n", socket_buffer->ip->src_ip);
+    
 
 }
 
+/*
+Converting string representation of IP to uint32_t
+*/
 uint32_t ip_to_int (const char * ip) {
     /* The return value. */
     unsigned v = 0;

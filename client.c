@@ -20,7 +20,7 @@ int main(int argc, char** argv) {
     mimir_send(sock, ip, msg);
 
     // Send argumnets message / file as MIMIR protocol
-        // If Dest IP in ARP Table wlp0s20wlp0s20f3f3wlp0s20f3-> Create IP header -> Create ETH header PROTO (MIMIR REQ) -> send 
+        // If Dest IP in ARP Table -> Create IP header -> Create ETH header PROTO (MIMIR REQ) -> send 
     cleanup_mimir(sock);
 
     return 0;
