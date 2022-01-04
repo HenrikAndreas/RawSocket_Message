@@ -16,6 +16,7 @@ void mimir_send(int sock, char* ip, char* msg) {
 
     socket_buffer->payload = (uint8_t*) msg;
     socket_buffer->ip_addr = ip;
+    memcpy(&socket_buffer->eth_addr, dest_arp->eth_addr, ETHER_ALEN);
 
     socket_buffer->mimir->src_port = MIMIR_PORT;
     socket_buffer->mimir->dst_port = MIMIR_PORT;

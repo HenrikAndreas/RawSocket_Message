@@ -8,6 +8,7 @@
 The Socket Buffer Structure
 */
 struct skb_buff {
+    uint8_t eth_addr[ETHER_ALEN];
     struct interface* iface;
     struct node* arp_table;
     struct mimir* mimir;

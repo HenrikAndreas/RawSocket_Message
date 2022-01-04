@@ -16,7 +16,8 @@ void ip_send(struct skb_buff* socket_buffer) {
     socket_buffer->ip->dst_ip = ip_to_int(socket_buffer->ip_addr);
     socket_buffer->ip->src_ip = ip_to_int(socket_buffer->iface->iface_ipv4);
 
-    
+    printf("DEST: %u\n", socket_buffer->ip->dst_ip);
+    printf("SRC: %u\n", socket_buffer->ip->src_ip);
 
 }
 
