@@ -1,8 +1,8 @@
 #include "ip.h"
 
 void ip_send(struct skb_buff* socket_buffer) {
-    socket_buffer->ip->version = IPV4;
-    socket_buffer->ip->ihl = 0x05;
+    socket_buffer->ip->version = 0b0100;
+    socket_buffer->ip->ihl = 0b0101;
     socket_buffer->ip->dscp = 0b000000;
     socket_buffer->ip->ecn =0b00;
     socket_buffer->ip->length = socket_buffer->mimir->mimir_length + sizeof(struct ip_hdr);
@@ -10,14 +10,16 @@ void ip_send(struct skb_buff* socket_buffer) {
     socket_buffer->ip->flags = 0b000;
     socket_buffer->ip->frag_offset = 0b0000000000000;
     socket_buffer->ip->ttl = 0x40; 
-    socket_buffer->ip->protocol = IPV4; 
+    socket_buffer->ip->protocol = 0x04; 
     socket_buffer->ip->checksum = 0;
 
     socket_buffer->ip->dst_ip = ip_to_int(socket_buffer->ip_addr);
     socket_buffer->ip->src_ip = ip_to_int(socket_buffer->iface->iface_ipv4);
 
-    printf("DEST: %u\n", socket_buffer->ip->dst_ip);
-    printf("SRC: %u\n", socket_buffer->ip->src_ip);
+    // printf("DEST: %u\n", socket_buffer->ip->dst_ip);
+    // printf("SRC: %u\n", socket_buffer->ip->src_ip);
+
+    send_eth(socket_buffer);
 
 }
 

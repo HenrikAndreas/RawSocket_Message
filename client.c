@@ -5,7 +5,7 @@ int main(int argc, char** argv) {
 
     // Handle arguments
     /*These two are temporary*/
-    char* ip = "10.0.0.60";
+    char* ip = "10.142.15.221";
     char* msg = "The art of dying is the way to let all go";
     char* interface = "wlp0s20f3";
     // Initiate Socket

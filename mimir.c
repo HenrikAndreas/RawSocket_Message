@@ -16,13 +16,18 @@ void mimir_send(int sock, char* ip, char* msg) {
 
     socket_buffer->payload = (uint8_t*) msg;
     socket_buffer->ip_addr = ip;
-    memcpy(&socket_buffer->eth_addr, dest_arp->eth_addr, ETHER_ALEN);
+
+    socket_buffer->sock = sock;
 
     socket_buffer->mimir->src_port = MIMIR_PORT;
     socket_buffer->mimir->dst_port = MIMIR_PORT;
     socket_buffer->mimir->mimir_length = sizeof(struct mimir) + strlen(msg);
     socket_buffer->mimir->checksum = 0;
     
+    memcpy(&socket_buffer->eth->eth_dst, dest_arp->eth_addr, ETHER_ALEN);
+    memcpy(&socket_buffer->eth->eth_src, socket_buffer->iface->iface_addr.sll_addr, ETHER_ALEN);
+    socket_buffer->eth->protocol = htons(IPV4_PROTO);
+
     print_mimir_hdr(socket_buffer->mimir);
     ip_send(socket_buffer);
 
@@ -36,10 +41,11 @@ void init_mimir() {
     socket_buffer->arp_table = create_arp_table();
     socket_buffer->mimir = malloc(sizeof(struct mimir));
     socket_buffer->ip = malloc(sizeof(struct ip_hdr));
+    socket_buffer->eth = malloc(sizeof(struct eth_header));
 
     // FOR TESTING PURPOSES | REMOVE
     uint8_t mac[ETHER_ALEN] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
-    char* ip = "10.0.0.60";
+    char* ip = "10.142.15.221";
     struct arp* new_arp = create_arp_entry(ip, mac);
     add_connection(socket_buffer->arp_table, new_arp);
     free(new_arp);
@@ -70,6 +76,7 @@ void cleanup_mimir(int sock) {
     free(socket_buffer->mimir);
     free(socket_buffer->iface);
     free(socket_buffer->ip);
+    free(socket_buffer->eth);
     free(socket_buffer);
     close(sock);
 }
@@ -90,8 +97,14 @@ Setting the Interface and bind it to socket buffer
 */
 void mimir_set_interface(char* name) {
     socket_buffer->iface = get_interface(name);
-    printf("Successfully set interface:\t%s\t%s\n", socket_buffer->iface->iface_name, socket_buffer->iface->iface_ipv4);
-
+    printf("Successfully set interface:\t%s\t%s\t", socket_buffer->iface->iface_name, socket_buffer->iface->iface_ipv4);
+    for (int i = 0; i < ETHER_ALEN; i++) {
+        if (i == ETHER_ALEN-1) {
+            printf("%X\n", socket_buffer->iface->iface_addr.sll_addr[i]);
+        } else {
+            printf("%X:", socket_buffer->iface->iface_addr.sll_addr[i]);
+        }
+    }
 }
 
 /*
@@ -117,12 +130,15 @@ struct interface* get_interface(char* name) {
     for (ifp = ifaces; ifp != NULL; ifp = ifp->ifa_next) {
         s=getnameinfo(ifp->ifa_addr,sizeof(struct sockaddr_in),host, NI_MAXHOST, NULL, 0, NI_NUMERICHOST);
         // ?- Should maybe be AF_PACKET. Move getnameinfo to func only for retrieving IPv4? 
-        if (ifp->ifa_addr != NULL && ifp->ifa_addr->sa_family == AF_INET && strcmp(ifp->ifa_name, name) == 0) {
+        if (ifp->ifa_addr != NULL && ifp->ifa_addr->sa_family == AF_PACKET && strcmp(ifp->ifa_name, name) == 0) {
             
             memcpy(&(iface->iface_addr), ifp->ifa_addr, sizeof(struct sockaddr_ll));
             iface->iface_name = name;
             iface->iface_index = i;
+        }
+        if (ifp->ifa_addr != NULL && ifp->ifa_addr->sa_family == AF_INET && strcmp(ifp->ifa_name, name) == 0) {
             strcpy(iface->iface_ipv4, host);
+
         }
         i++;
     }
@@ -130,6 +146,5 @@ struct interface* get_interface(char* name) {
 
     free(ifaces);
 
-    
     return iface;
 }

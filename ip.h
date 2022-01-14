@@ -2,13 +2,12 @@
 #define IP_H
 
 #include "libs.h"
-#include "skb.h"
 
 #define IPV4 0x04
 
 struct ip_hdr {
-    uint8_t version : 4;
     uint8_t ihl : 4;
+    uint8_t version : 4;
     uint8_t dscp : 6;
     uint8_t ecn : 2;
     uint16_t length;
@@ -22,6 +21,9 @@ struct ip_hdr {
     uint32_t src_ip;
 
 }__attribute__((packed));
+
+#include "skb.h"
+#include "ether.h"
 
 uint32_t ip_to_int (const char*);
 void ip_send(struct skb_buff*);

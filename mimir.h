@@ -8,6 +8,7 @@
 
 #define MIMIR_PORT 0x01A4
 
+
 struct mimir {
     uint16_t src_port;
     uint16_t dst_port;
